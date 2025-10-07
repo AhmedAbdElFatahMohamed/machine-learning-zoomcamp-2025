@@ -4,7 +4,7 @@ import numpy as np
 df = pd.read_csv("car_fuel_efficiency.csv")
 
 
-# Q1. Q1. Missing values?
+# Q1. Missing values?
 
 missing_cols = df.columns[df.isnull().any()]
 print("Columns with missing values:", list(missing_cols))
