@@ -26,7 +26,7 @@ print("Correlation coefficient:", round(highest_corr_value, 3))
 
 print("__" * 50)
 
-# Split data 60/20/20
+# Split data 
 X = df.drop(columns=['converted'])
 y = df['converted']
 
