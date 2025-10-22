@@ -8,10 +8,8 @@ from sklearn.metrics import precision_score, recall_score , f1_score
 from sklearn.model_selection import KFold
 import matplotlib.pyplot as plt
 
-# Load dataset
-df = pd.read_csv("course_lead_scoring.csv")  # Replace with your actual filename
+df = pd.read_csv("course_lead_scoring.csv")  
 
-# Check for missing values
 categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
 numerical_cols = df.select_dtypes(include=['number']).columns.tolist()
 
@@ -25,10 +23,8 @@ for col in categorical_cols:
 for col in numerical_cols:
     df[col] = df[col].fillna(0.0)
 
-# Split data
 train_df, temp_df = train_test_split(df, test_size=0.4, random_state=1)
 
-# Second split: split temp into 50%/50% (which gives 20%/20% of original)
 val_df, test_df = train_test_split(temp_df, test_size=0.5, random_state=1)
 
 print(f"Train size: {len(train_df)} ({len(train_df)/len(df):.1%})")
@@ -109,17 +105,17 @@ for threshold in thresholds:
     precisions.append(precision)
     recalls.append(recall)
 
-# plt.figure(figsize=(10, 6))
-# plt.plot(thresholds, precisions, label='Precision', linewidth=2)
-# plt.plot(thresholds, recalls, label='Recall', linewidth=2)
-# plt.xlabel('Threshold', fontsize=12)
-# plt.ylabel('Score', fontsize=12)
-# plt.title('Precision and Recall vs Threshold', fontsize=14)
-# plt.legend(fontsize=12)
-# plt.grid(True, alpha=0.3)
-# plt.xlim(0, 1)
-# plt.ylim(0, 1)
-# plt.show()
+plt.figure(figsize=(10, 6))
+plt.plot(thresholds, precisions, label='Precision', linewidth=2)
+plt.plot(thresholds, recalls, label='Recall', linewidth=2)
+plt.xlabel('Threshold', fontsize=12)
+plt.ylabel('Score', fontsize=12)
+plt.title('Precision and Recall vs Threshold', fontsize=14)
+plt.legend(fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.xlim(0, 1)
+plt.ylim(0, 1)
+plt.show()
 
 differences = np.abs(np.array(precisions) - np.array(recalls))
 
@@ -213,11 +209,9 @@ print("__" * 50)
 
 #Q6. Hyperparameter Tuning
 
-# C values to test
 C_values = [0.000001, 0.001, 1]
 
-# Separate features and target from full training set
-X_full = df_full_train.drop(columns=['converted'])  # Update if target name is different
+X_full = df_full_train.drop(columns=['converted']) 
 y_full = df_full_train['converted']
 
 results = {}
